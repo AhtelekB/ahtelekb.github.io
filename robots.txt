@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+Sitemap: https://ahtelekb.github.io/sitemap.xml
+Sitemap: https://ahtelekb.github.io/baidusitemap.xml

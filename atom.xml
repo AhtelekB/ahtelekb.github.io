@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>AhtelekB&#39;s Blog</title>
+  
+  <subtitle>个人技术博客</subtitle>
+  <link href="https://ahtelekb.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://ahtelekb.github.io/"/>
+  <updated>2023-02-14T07:59:49.286Z</updated>
+  <id>https://ahtelekb.github.io/</id>
+  
+  <author>
+    <name>Ahtelek B</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一看就会的 Anaconda 搭建 OpenCV for Python 环境（全平台通用）</title>
+    <link href="https://ahtelekb.github.io/posts/18e12ea3/"/>
+    <id>https://ahtelekb.github.io/posts/18e12ea3/</id>
+    <published>2023-02-07T16:50:50.000Z</published>
+    <updated>2023-02-14T07:59:49.286Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;在学习 OpenCV 的时候，需要搭建 OpenCV 的环境并安装一些库，本文就准备了 OpenCV for</summary>
+        
+      
+    
+    
+    
+    <category term="OpenCV" scheme="https://ahtelekb.github.io/categories/OpenCV/"/>
+    
+    
+    <category term="Anaconda" scheme="https://ahtelekb.github.io/tags/Anaconda/"/>
+    
+    <category term="Python" scheme="https://ahtelekb.github.io/tags/Python/"/>
+    
+    <category term="OpenCV" scheme="https://ahtelekb.github.io/tags/OpenCV/"/>
+    
+    <category term="环境搭建" scheme="https://ahtelekb.github.io/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    
+    <category term="全平台通用" scheme="https://ahtelekb.github.io/tags/%E5%85%A8%E5%B9%B3%E5%8F%B0%E9%80%9A%E7%94%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Anaconda和pip常用命令汇总：简单，通俗易懂</title>
+    <link href="https://ahtelekb.github.io/posts/3ca71393/"/>
+    <id>https://ahtelekb.github.io/posts/3ca71393/</id>
+    <published>2023-02-07T07:53:09.000Z</published>
+    <updated>2023-02-14T04:14:58.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;在学习 anaconda 的常用命令之前要先安装好 &lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="OpenCV" scheme="https://ahtelekb.github.io/categories/OpenCV/"/>
+    
+    
+    <category term="Anaconda" scheme="https://ahtelekb.github.io/tags/Anaconda/"/>
+    
+    <category term="Python" scheme="https://ahtelekb.github.io/tags/Python/"/>
+    
+    <category term="常用命令" scheme="https://ahtelekb.github.io/tags/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    
+    <category term="环境管理" scheme="https://ahtelekb.github.io/tags/%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/"/>
+    
+    <category term="pip" scheme="https://ahtelekb.github.io/tags/pip/"/>
+    
+    <category term="包管理" scheme="https://ahtelekb.github.io/tags/%E5%8C%85%E7%AE%A1%E7%90%86/"/>
+    
+    <category term="pip命令" scheme="https://ahtelekb.github.io/tags/pip%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu安装Anaconda并且配置国内镜像教程</title>
+    <link href="https://ahtelekb.github.io/posts/2516b67e/"/>
+    <id>https://ahtelekb.github.io/posts/2516b67e/</id>
+    <published>2023-02-06T07:02:52.000Z</published>
+    <updated>2023-02-14T04:14:58.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;我们在学习 Python 的时候需要不同的 Python</summary>
+        
+      
+    
+    
+    
+    <category term="OpenCV" scheme="https://ahtelekb.github.io/categories/OpenCV/"/>
+    
+    
+    <category term="Anaconda" scheme="https://ahtelekb.github.io/tags/Anaconda/"/>
+    
+    <category term="Python" scheme="https://ahtelekb.github.io/tags/Python/"/>
+    
+    <category term="国内镜像" scheme="https://ahtelekb.github.io/tags/%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F/"/>
+    
+    <category term="Ubuntu" scheme="https://ahtelekb.github.io/tags/Ubuntu/"/>
+    
+    <category term="Linux" scheme="https://ahtelekb.github.io/tags/Linux/"/>
+    
+    <category term="环境搭建教程" scheme="https://ahtelekb.github.io/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Windows安装Anaconda并且配置国内镜像教程</title>
+    <link href="https://ahtelekb.github.io/posts/89ec84c4/"/>
+    <id>https://ahtelekb.github.io/posts/89ec84c4/</id>
+    <published>2023-02-05T06:57:06.000Z</published>
+    <updated>2023-02-14T04:14:58.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;我们在学习 Python 的时候需要不同的 Python</summary>
+        
+      
+    
+    
+    
+    <category term="OpenCV" scheme="https://ahtelekb.github.io/categories/OpenCV/"/>
+    
+    
+    <category term="Anaconda" scheme="https://ahtelekb.github.io/tags/Anaconda/"/>
+    
+    <category term="Python" scheme="https://ahtelekb.github.io/tags/Python/"/>
+    
+    <category term="国内镜像" scheme="https://ahtelekb.github.io/tags/%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F/"/>
+    
+    <category term="环境搭建教程" scheme="https://ahtelekb.github.io/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/"/>
+    
+    <category term="Windows" scheme="https://ahtelekb.github.io/tags/Windows/"/>
+    
+  </entry>
+  
+</feed>

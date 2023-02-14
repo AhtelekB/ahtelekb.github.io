@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Anaconda和pip常用命令汇总：简单，通俗易懂</title>
+    <url>/posts/3ca71393/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>在学习 anaconda 的常用命令之前要先安装好 <a href="https://ahtelekb.gitee.io/posts/89ec84c4/">Anaconda for Windows</a>，<a href="https://ahtelekb.gitee.io/posts/2516b67e/">Anaconda for Ubuntu</a>，这里我总结了 Windows 环境下和 Ubuntu 环境下的常用命令，包含了 Anaconda 本身的命令、管理环境的命令（新建环境、激活环境、退出环境、切换环境、列出环境、复制环境、通过 yml 文件复制环境、删除环境）、管理包（搜索包、包列表、安装包、更新包、卸载包）</p>
+</blockquote>
+<h2 id="Anaconda"><a href="#Anaconda" class="headerlink" title="Anaconda"></a>Anaconda</h2><h3 id="升级-conda"><a href="#升级-conda" class="headerlink" title="升级 conda"></a>升级 conda</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda update conda
+conda update anaconda
+conda update anaconda-navigator<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="卸载-conda"><a href="#卸载-conda" class="headerlink" title="卸载 conda"></a>卸载 conda</h3><blockquote>
+<p>Windows</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">C:<span class="token punctuation">\</span><span class="token punctuation">\</span>Users<span class="token punctuation">\</span><span class="token punctuation">\</span>用户名<span class="token punctuation">\</span><span class="token punctuation">\</span>anaconda3<span class="token punctuation">\</span><span class="token punctuation">\</span>Uninstall-Anaconda3.exe<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128154003466-414222476.png" alt="卸载 conda">
+
+<blockquote>
+<p>Ubuntu</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rm</span> <span class="token parameter variable">-rf</span> anaconda3<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="清理-conda"><a href="#清理-conda" class="headerlink" title="清理 conda"></a>清理 conda</h3><blockquote>
+<p>通过 conda clean -p 来删除一些没用的包，这个命令会检查哪些包没有在包缓存中被硬依赖到其他地方，并删除它们<br>通过 conda clean -t 可以将 conda 保存下来的 tar 包。</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 删除没有用的包</span>
+conda clean <span class="token parameter variable">-p</span>
+<span class="token comment"># tar打包</span>
+conda clean <span class="token parameter variable">-t</span>
+<span class="token comment"># 删除所有的安装包及cache</span>
+conda clean <span class="token parameter variable">-y</span> <span class="token parameter variable">-all</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="conda-管理环境"><a href="#conda-管理环境" class="headerlink" title="conda 管理环境"></a>conda 管理环境</h2><h3 id="conda-新建环境"><a href="#conda-新建环境" class="headerlink" title="conda 新建环境"></a>conda 新建环境</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda create <span class="token parameter variable">--name</span> <span class="token punctuation">[</span>env_name<span class="token punctuation">]</span> <span class="token punctuation">[</span>package_name1<span class="token punctuation">]</span> <span class="token punctuation">[</span>package_name2<span class="token punctuation">]</span>
+conda create <span class="token parameter variable">-n</span> <span class="token punctuation">[</span>env_name<span class="token punctuation">]</span> <span class="token punctuation">[</span>package_name1<span class="token punctuation">]</span> <span class="token punctuation">[</span>package_name2<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ul>
+<li><p>[env_name] 即创建的环境名。建议以英文命名不加空格。</p>
+</li>
+<li><p>[package_name] 即安装在环境中的包名。</p>
+</li>
+</ul>
+<blockquote>
+<p>比如：我要准备 Python 版本为 3.6，要自带 NumPy 包</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda create <span class="token parameter variable">-n</span> OpenCV3.6 <span class="token assign-left variable">python</span><span class="token operator">=</span><span class="token number">3.6</span> NumPy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128153533605-1452435520.png" alt="创建过程">
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128183349967-1307315321.png" alt="创建过程">
+
+<h3 id="conda-切换环境（激活环境、退出环境）"><a href="#conda-切换环境（激活环境、退出环境）" class="headerlink" title="conda 切换环境（激活环境、退出环境）"></a>conda 切换环境（激活环境、退出环境）</h3><blockquote>
+<p>我们在新建好一个环境后要激活才可以使用，或者我们要从 a 环境切换到 b 环境</p>
+</blockquote>
+<blockquote>
+<p>激活环境</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Windows激活环境</span>
+activate OpenCV3.6
+
+<span class="token comment"># Ubuntu激活环境</span>
+<span class="token builtin class-name">source</span> activate
+conda activate OpenCV3.6<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128181823566-609219652.png" alt="激活环境">
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128183506705-1336014894.png" alt="激活环境">
+
+<blockquote>
+<p>切换环境</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Windows切换环境</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p>切换环境只需要退出当前环境，在激活下个环境即可<br>Windows 只需要一次命令即可退出环境，直接切换就好了<br>Ubuntu 需要输入一次命令后可以切换环境，两次命令才会退出 conda 环境</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128183611723-1103201775.png" alt="退出环境">
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128183834561-1156517771.png" alt="退出环境">
+
+<h3 id="conda-列出环境"><a href="#conda-列出环境" class="headerlink" title="conda 列出环境"></a>conda 列出环境</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda <span class="token function">env</span> list
+conda info <span class="token parameter variable">-e</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>conda env list 和 conda info -e 命令都是列出当前的虚拟环境（全平台通用）</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128185144933-1126594412.png" alt="列出环境">
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128185415645-1165382541.png" alt="列出环境">
+
+<h3 id="conda-复制环境（通过-yml-文件复制环境）"><a href="#conda-复制环境（通过-yml-文件复制环境）" class="headerlink" title="conda 复制环境（通过 yml 文件复制环境）"></a>conda 复制环境（通过 yml 文件复制环境）</h3><blockquote>
+<p>复制环境(本机上使用)</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda create <span class="token parameter variable">--name</span> <span class="token punctuation">[</span>new_env_name<span class="token punctuation">]</span> <span class="token parameter variable">--clone</span> <span class="token punctuation">[</span>old_env_name<span class="token punctuation">]</span>
+conda create <span class="token parameter variable">--n</span> <span class="token punctuation">[</span>new_env_name<span class="token punctuation">]</span> <span class="token parameter variable">--clone</span> <span class="token punctuation">[</span>old_env_name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>开始复制</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128190411427-2097084258.png" alt="开始复制">
+
+<blockquote>
+<p>复制成功了</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128190432418-1641739791.png" alt="复制成功了">
+
+<blockquote>
+<p>yaml 文件实现克隆环境（跨设备使用）<br>首先激活环境<br>再导出环境<br>最后用 yaml 文件创建新环境</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">activate OpenCV3.6
+conda <span class="token function">env</span> <span class="token builtin class-name">export</span> <span class="token operator">&gt;</span> <span class="token punctuation">[</span>env_name<span class="token punctuation">]</span>.yaml
+conda <span class="token function">env</span> <span class="token builtin class-name">export</span> <span class="token operator">&gt;</span> OepnCV.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>开始导出了</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128190735357-659221950.png" alt="开始导出">
+
+<blockquote>
+<p>会导出到你选择的位置</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128190854471-446170659.png" alt="导出到你选择的位置">
+
+<blockquote>
+<p>yaml 文件创建新环境</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda <span class="token function">env</span> create <span class="token parameter variable">-f</span> <span class="token punctuation">[</span>env_name<span class="token punctuation">]</span>.yaml
+conda <span class="token function">env</span> create <span class="token parameter variable">-f</span> OpenCV.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>如果想在同一台机器上复制，需要把 yaml 文件中的环境名修改为一个新的名字，否则会冲突</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128191150585-295530391.png" alt="已存在环境">
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128191234672-355855786.png" alt="开始创建环境">
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128191256011-907443994.png" alt="环境创建完成">
+
+<h3 id="conda-删除环境"><a href="#conda-删除环境" class="headerlink" title="conda 删除环境"></a>conda 删除环境</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda remove <span class="token parameter variable">-n</span> <span class="token punctuation">[</span>env_name<span class="token punctuation">]</span> <span class="token parameter variable">--all</span>
+conda remove <span class="token parameter variable">-n</span> OpenCV <span class="token parameter variable">--all</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>开始删除</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128191617908-2146887790.png" alt="开始删除环境">
+
+<blockquote>
+<p>删除成功</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128191654443-2039747160.png" alt="环境删除成功">
+
+<h2 id="conda-管理包"><a href="#conda-管理包" class="headerlink" title="conda 管理包"></a>conda 管理包</h2><h3 id="conda-搜索包"><a href="#conda-搜索包" class="headerlink" title="conda 搜索包"></a>conda 搜索包</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda search <span class="token punctuation">[</span>package_name<span class="token punctuation">]</span>
+conda search numpy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128192402741-943393825.png" alt="搜索numpy">
+
+<h3 id="conda-包列表"><a href="#conda-包列表" class="headerlink" title="conda 包列表"></a>conda 包列表</h3><blockquote>
+<p>查看当前环境包列表</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda list<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128192723755-157233136.png" alt="列出当前环境包">
+
+<blockquote>
+<p>查看指定环境包列表</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda list <span class="token parameter variable">-n</span> <span class="token punctuation">[</span>env_name<span class="token punctuation">]</span>
+conda list <span class="token parameter variable">-n</span> OpenCV3.6<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128193030511-2130433709.png" alt="查看指定环境包列表">
+
+<h3 id="conda-安装包"><a href="#conda-安装包" class="headerlink" title="conda 安装包"></a>conda 安装包</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda <span class="token function">install</span> <span class="token punctuation">[</span>package_name<span class="token punctuation">]</span>
+conda <span class="token function">install</span> numpy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128193556273-496846207.png" alt="安装">
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128193646788-995998750.png" alt="安装中">
+
+<h3 id="conda-更新包"><a href="#conda-更新包" class="headerlink" title="conda 更新包"></a>conda 更新包</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda update <span class="token punctuation">[</span>package_name<span class="token punctuation">]</span>
+conda update numpy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128193719842-522072623.png" alt="更新完成">
+
+<h3 id="conda-卸载包"><a href="#conda-卸载包" class="headerlink" title="conda 卸载包"></a>conda 卸载包</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda remove <span class="token punctuation">[</span>package_name<span class="token punctuation">]</span>
+conda remove numpy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128193800833-645746356.png" alt="卸载（删除）包">
+
+<h2 id="pip-命令"><a href="#pip-命令" class="headerlink" title="pip 命令"></a>pip 命令</h2><h3 id="pip-包列表"><a href="#pip-包列表" class="headerlink" title="pip 包列表"></a>pip 包列表</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip list<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128195620634-125783214.png" alt="pip 包列表">
+
+<h3 id="pip-搜索包"><a href="#pip-搜索包" class="headerlink" title="pip 搜索包"></a>pip 搜索包</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip search <span class="token punctuation">[</span>package_name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="pip-安装包"><a href="#pip-安装包" class="headerlink" title="pip 安装包"></a>pip 安装包</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> <span class="token punctuation">[</span>package_name<span class="token punctuation">]</span>
+pip <span class="token function">install</span> pygame<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128201123882-168281165.png" alt="pip 安装包">
+
+<h3 id="pip-包信息"><a href="#pip-包信息" class="headerlink" title="pip 包信息"></a>pip 包信息</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip show <span class="token punctuation">[</span>package_name<span class="token punctuation">]</span>
+pip show pygame<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128201145439-685316520.png" alt="pip 包信息">
+
+<h3 id="pip-更新包"><a href="#pip-更新包" class="headerlink" title="pip 更新包"></a>pip 更新包</h3><blockquote>
+<p>查看可以更新的包</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip list <span class="token parameter variable">-o</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128201210591-1855987110.png" alt="pip 更新包">
+
+<blockquote>
+<p>更新包</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> <span class="token parameter variable">-U</span> <span class="token punctuation">[</span>package_name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="pip-卸载包"><a href="#pip-卸载包" class="headerlink" title="pip 卸载包"></a>pip 卸载包</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip uninstall <span class="token punctuation">[</span>package_name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128201244997-1286691349.png" alt="pip 卸载包">
+
+<h3 id="pip-导出包"><a href="#pip-导出包" class="headerlink" title="pip 导出包"></a>pip 导出包</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip freeze <span class="token operator">&gt;</span> requirements.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128201321439-1135559945.png" alt="pip 导出包">
+
+<h3 id="pip-版本"><a href="#pip-版本" class="headerlink" title="pip 版本"></a>pip 版本</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token parameter variable">-V</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128201338295-1157530083.png" alt="pip 版本">
+
+<h3 id="pip-帮助文件"><a href="#pip-帮助文件" class="headerlink" title="pip 帮助文件"></a>pip 帮助文件</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token parameter variable">-h</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128201353616-1872241603.png" alt="pip 帮助文档">
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li><a href="https://www.jianshu.com/p/6d7de7a00b8d">https://www.jianshu.com/p/6d7de7a00b8d</a></li>
+<li><a href="https://blog.csdn.net/fyuanfena/article/details/52080270">https://blog.csdn.net/fyuanfena/article/details/52080270</a></li>
+<li><a href="https://blog.csdn.net/chenxy_bwave/article/details/119996001">https://blog.csdn.net/chenxy_bwave/article/details/119996001</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/2210850?areaSource=&amp;traceId=">https://cloud.tencent.com/developer/article/2210850?areaSource=&amp;traceId=</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/600930786">https://zhuanlan.zhihu.com/p/600930786</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/68578051">https://zhuanlan.zhihu.com/p/68578051</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/364879836">https://zhuanlan.zhihu.com/p/364879836</a></li>
+<li><a href="https://blog.csdn.net/weixin_47822556/article/details/110421620">https://blog.csdn.net/weixin_47822556/article/details/110421620</a></li>
+<li><a href="https://www.cnblogs.com/BlueSkyyj/p/8268621.html">https://www.cnblogs.com/BlueSkyyj/p/8268621.html</a></li>
+<li><a href="https://blog.csdn.net/helunqu2017/article/details/123601912">https://blog.csdn.net/helunqu2017/article/details/123601912</a></li>
+<li><a href="https://blog.csdn.net/qq_32317661/article/details/123735705">https://blog.csdn.net/qq_32317661/article/details/123735705</a></li>
+<li><a href="https://blog.51cto.com/pigeon/5765058">https://blog.51cto.com/pigeon/5765058</a></li>
+<li><a href="https://pip.pypa.io/en/stable/getting-started/">https://pip.pypa.io/en/stable/getting-started/</a></li>
+<li><a href="https://mirrors.tuna.tsinghua.edu.cn/help/pypi/">https://mirrors.tuna.tsinghua.edu.cn/help/pypi/</a></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>OpenCV</category>
+      </categories>
+      <tags>
+        <tag>Anaconda</tag>
+        <tag>Python</tag>
+        <tag>常用命令</tag>
+        <tag>环境管理</tag>
+        <tag>pip</tag>
+        <tag>包管理</tag>
+        <tag>pip命令</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu安装Anaconda并且配置国内镜像教程</title>
+    <url>/posts/2516b67e/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>我们在学习 Python 的时候需要不同的 Python 版本，关系到电脑环境变量配置换来换去很是麻烦，所以这个时候我们需要一个虚拟的 Python 环境变量，我之前也装过 virtualenv、virtualenvwrapper、Venv 换来换去麻烦命令一大堆，记不住，最后选择 Anaconda，用一个代替全部，只要记住 conda 命令和 pip 命令就好了，不仅省事还方便。conda 和 pip 命令可以看这个文章<a href="https://ahtelekb.gitee.io/posts/3ca71393/">Anaconda 和 pip 常用命令汇总：简单，通俗易懂</a>都是我查阅资料总结好的，放心食用。</p>
+</blockquote>
+<h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a>视频教程</h2><iframe src="//player.bilibili.com/player.html?bvid=BV1nv4y167j7&amp;page=1" width="800" height="600" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+<h2 id="下载-anaconda"><a href="#下载-anaconda" class="headerlink" title="下载 anaconda"></a>下载 anaconda</h2><blockquote>
+<p>官网</p>
+<p><a href="https://repo.anaconda.com/archive/">https://repo.anaconda.com/archive/</a></p>
+<p>国内镜像</p>
+<p><a href="https://mirrors.bfsu.edu.cn/anaconda/archive/">https://mirrors.bfsu.edu.cn/anaconda/archive/</a></p>
+<p><a href="https://mirrors.xjtu.edu.cn/anaconda/archive/">https://mirrors.xjtu.edu.cn/anaconda/archive/</a></p>
+<p><a href="https://mirror.bjtu.edu.cn/anaconda/archive/">https://mirror.bjtu.edu.cn/anaconda/archive/</a></p>
+<p><a href="https://mirrors.hit.edu.cn/anaconda/archive/">https://mirrors.hit.edu.cn/anaconda/archive/</a></p>
+<p><a href="https://mirrors.aliyun.com/anaconda/archive/?spm=a2c6h.25603864.0.0.2da34eb925S2Ym">https://mirrors.aliyun.com/anaconda/archive/?spm=a2c6h.25603864.0.0.2da34eb925S2Ym</a></p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 以清华源的Anaconda3-2022.10-Linux-x86_64展示</span>
+<span class="token function">wget</span> https://mirrors.bfsu.edu.cn/anaconda/archive/Anaconda3-2022.10-Linux-x86_64.sh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128175608162-1907868019.png" alt="正在下载Anaconda">
+
+<h2 id="安装-anaconda"><a href="#安装-anaconda" class="headerlink" title="安装 anaconda"></a>安装 anaconda</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sh</span> Anaconda3-2022.10-Linux-x86_64.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p>Please, press ENTER to continue -&gt; 回车继续</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128175649747-374534897.png" alt="回车继续">
+
+<blockquote>
+<p>Do you accept the license terms? [yes|no] -&gt; 同意协议输入 yes 回车</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128175728041-2042665694.png" alt="同意协议输入 yes 回车">
+
+<blockquote>
+<p>待安装结束</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128175751062-2141048868.png" alt="待安装结束">
+
+<blockquote>
+<p>安装好了</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128180103006-677890545.png" alt="安装好了">
+
+<h2 id="变量环境"><a href="#变量环境" class="headerlink" title="变量环境"></a>变量环境</h2><blockquote>
+<p>当然你安装完了，不告诉电脑 Anaconda 的位置，你也没办法使用 Anaconda，这就是为什么要设置环境变量的原因。在 Ubuntu 中分为普通用户也就是非 root 用户和 root 用户，权限不一样。</p>
+</blockquote>
+<h3 id="普通用户变量环境"><a href="#普通用户变量环境" class="headerlink" title="普通用户变量环境"></a>普通用户变量环境</h3><blockquote>
+<p>我们首先配置普通用户的环境变量，也就是非 root 用户</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">vim</span>  ~/.bashrc
+
+<span class="token comment"># 下面的添加到bashrc文件的末尾添加</span>
+
+<span class="token comment"># anaconda环境</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span>/home/ahtelek/anaconda3/bin:<span class="token environment constant">$PATH</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>直接输入大写的 G 可以直接跳转到文本末尾<br>输入小写的 a 或者 i 都可以直接编辑文档<br>这个最好看看 vi/vim 教程，毕竟以后常用<br>最后输入英文冒号<mark>:</mark>加<mark>wq!</mark>回车就保存成功了</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128180330166-1764374577.png" alt="环境变量">
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128180655405-741877166.png" alt="保存">
+
+<h3 id="超级用户变量环境"><a href="#超级用户变量环境" class="headerlink" title="超级用户变量环境"></a>超级用户变量环境</h3><blockquote>
+<p>超级用户，也就是 root 用户操作和普通用户差不多</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">vim</span> /etc/profile
+
+<span class="token comment"># 下面的添加到profile文件的末尾添加</span>
+
+<span class="token comment"># anaconda环境</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span>/home/ahtelek/anaconda3/bin:<span class="token environment constant">$PATH</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>直接输入大写的 G 可以直接跳转到文本末尾<br>输入小写的 a 或者 i 都可以直接编辑文档<br>这个最好看看 vi/vim 教程，毕竟以后常用<br>最后输入英文冒号<mark>:</mark>加<mark>wq!</mark>回车就保存成功了</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128181102027-800442526.png" alt="环境变量">
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128180655405-741877166.png" alt="保存">
+
+<blockquote>
+<p>我们配置好以后需要让配置生效</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">vim</span> /root/.bashrc
+
+<span class="token comment"># 在文件的末尾添加</span>
+<span class="token builtin class-name">source</span> /etc/profile<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128181307377-190838524.png" alt="配置生效">
+
+<h2 id="配置生效"><a href="#配置生效" class="headerlink" title="配置生效"></a>配置生效</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">source</span> ~/.bashrc
+<span class="token builtin class-name">source</span> /root/.bashrc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>这就生效了</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128181413801-39192584.png" alt="配置生效">
+
+<h2 id="配置国内源"><a href="#配置国内源" class="headerlink" title="配置国内源"></a>配置国内源</h2><h3 id="普通用户配置国内源"><a href="#普通用户配置国内源" class="headerlink" title="普通用户配置国内源"></a>普通用户配置国内源</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda config <span class="token parameter variable">--set</span> show_channel_urls <span class="token function">yes</span>
+
+<span class="token function">vim</span> ~/.condarc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128181708465-746691285.png" alt="写入配置源">
+
+<blockquote>
+<p>复制到.condarc 文件</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">channels:
+  - defaults
+show_channel_urls: <span class="token boolean">true</span>
+default_channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+custom_channels:
+  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  pytorch-lts: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128181615724-1560798942.png" alt="国内源复制到.condarc 文件">
+
+<h3 id="超级用户配置国内源"><a href="#超级用户配置国内源" class="headerlink" title="超级用户配置国内源"></a>超级用户配置国内源</h3><blockquote>
+<p>超级用户，也就是 root 用户操作和普通用户差不多，只不过要提前切换成超级用户(root 用户)</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">su</span>
+conda config <span class="token parameter variable">--set</span> show_channel_urls <span class="token function">yes</span>
+
+<span class="token function">vim</span> ~/.condarc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128182001617-113818210.png" alt="写入配置源">
+
+<blockquote>
+<p>复制到.condarc 文件</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">channels:
+  - defaults
+show_channel_urls: <span class="token boolean">true</span>
+default_channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+custom_channels:
+  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  pytorch-lts: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128181615724-1560798942.png" alt="国内源复制到.condarc 文件">
+
+<blockquote>
+<p>测试</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 清除索引缓存</span>
+conda clean <span class="token parameter variable">-i</span>
+
+conda create <span class="token parameter variable">-n</span> name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>清除索引缓存，点 y 就好了</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128182026277-1557998198.png" alt="清除索引缓存">
+
+<blockquote>
+<p>新建环境，点 y 就好了</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230128182100548-1073707370.png" alt="新建环境">
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li><a href="https://www.jianshu.com/p/e39cb192bde0">https://www.jianshu.com/p/e39cb192bde0</a></li>
+<li><a href="https://mirror.nju.edu.cn/help/anaconda">https://mirror.nju.edu.cn/help/anaconda</a></li>
+<li><a href="https://mirrors.pku.edu.cn/Help/Anaconda">https://mirrors.pku.edu.cn/Help/Anaconda</a></li>
+<li><a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/">https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/</a></li>
+<li><a href="https://mirrors.bfsu.edu.cn/help/anaconda/">https://mirrors.bfsu.edu.cn/help/anaconda/</a></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>OpenCV</category>
+      </categories>
+      <tags>
+        <tag>Anaconda</tag>
+        <tag>Python</tag>
+        <tag>国内镜像</tag>
+        <tag>Ubuntu</tag>
+        <tag>Linux</tag>
+        <tag>环境搭建教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows安装Anaconda并且配置国内镜像教程</title>
+    <url>/posts/89ec84c4/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>我们在学习 Python 的时候需要不同的 Python 版本，关系到电脑环境变量配置换来换去很是麻烦，所以这个时候我们需要一个虚拟的 Python 环境变量，我之前也装过 virtualenv、virtualenvwrapper、Venv 换来换去麻烦命令一大堆，记不住，最后选择 Anaconda，用一个代替全部，只要记住 conda 命令和 pip 命令就好了，不仅省事还方便。conda 和 pip 命令可以看这个文章<a href="https://ahtelekb.gitee.io/posts/3ca71393/">Anaconda 和 pip 常用命令汇总：简单，通俗易懂</a>都是我查阅资料总结好的，放心食用。</p>
+</blockquote>
+<h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a>视频教程</h2><iframe src="//player.bilibili.com/player.html?bvid=BV1Q84y1j7oP&amp;page=1" width="800" height="600" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+<h2 id="下载-anaconda"><a href="#下载-anaconda" class="headerlink" title="下载 anaconda"></a>下载 anaconda</h2><p>anaconda 官网是在国外，我们访问的适合会很卡，下载慢。我提供了一些国内高校镜像供大家参考。</p>
+<blockquote>
+<p>官网</p>
+<p><a href="https://repo.anaconda.com/archive/">https://repo.anaconda.com/archive/</a></p>
+<p><a href="https://anaconda.org.cn/">https://anaconda.org.cn/</a></p>
+<p>国内镜像</p>
+<p><a href="https://mirrors.bfsu.edu.cn/anaconda/archive/">https://mirrors.bfsu.edu.cn/anaconda/archive/</a></p>
+<p><a href="https://mirrors.xjtu.edu.cn/anaconda/archive/">https://mirrors.xjtu.edu.cn/anaconda/archive/</a></p>
+<p><a href="https://mirror.bjtu.edu.cn/anaconda/archive/">https://mirror.bjtu.edu.cn/anaconda/archive/</a></p>
+<p><a href="https://mirrors.hit.edu.cn/anaconda/archive/">https://mirrors.hit.edu.cn/anaconda/archive/</a></p>
+<p><a href="https://mirrors.aliyun.com/anaconda/archive/?spm=a2c6h.25603864.0.0.2da34eb925S2Ym">https://mirrors.aliyun.com/anaconda/archive/?spm=a2c6h.25603864.0.0.2da34eb925S2Ym</a></p>
+</blockquote>
+<blockquote>
+<p>以清华源的 Anaconda3-2022.10-Windows-x86_64 展示（点击即可下载）<br><a href="https://mirrors.bfsu.edu.cn/anaconda/archive/Anaconda3-2022.10-Windows-x86_64.exe">https://mirrors.bfsu.edu.cn/anaconda/archive/Anaconda3-2022.10-Windows-x86_64.exe</a></p>
+</blockquote>
+<h2 id="安装-anaconda"><a href="#安装-anaconda" class="headerlink" title="安装 anaconda"></a>安装 anaconda</h2><blockquote>
+<p>无脑下一步，这两个都勾选上</p>
+</blockquote>
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230109141712986-312136365.png" alt="无脑下一步，这两个都勾选上">
+
+<h2 id="变量环境"><a href="#变量环境" class="headerlink" title="变量环境"></a>变量环境</h2><blockquote>
+<p><mark>设置-&gt;系统-&gt;系统信息-&gt;高级系统设置-&gt;环境变量-&gt;用户变量-&gt;Path</mark>下检查有没有这五个变量，没有就加上<br><img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230109141832391-2091331149.png" alt="变量环境"></p>
+</blockquote>
+<h2 id="配置国内源"><a href="#配置国内源" class="headerlink" title="配置国内源"></a>配置国内源</h2><p>在 Windows 默认是没有<mark>.condarc</mark>文件的，我们需要 win+r 输入 cmd 回车，在 cmd 命令行中输入<mark>conda config –set show_channel_urls yes</mark></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda config <span class="token parameter variable">--set</span> show_channel_urls <span class="token function">yes</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>在<mark>C:\Users\你的用户名</mark>目录下会生成<mark>.condarc</mark>文件<br><img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230126184729952-22629438.png" alt="生成.condarc文件"></p>
+<p>将配置文件复制到复制到.condarc 文件</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">channels:
+  - defaults
+show_channel_urls: <span class="token boolean">true</span>
+default_channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+custom_channels:
+  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  pytorch-lts: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如下图所示<br><img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230126185127652-1694469861.png" alt="复制到.condarc 文件"></p>
+<blockquote>
+<p>测试</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 清除索引缓存</span>
+conda clean <span class="token parameter variable">-i</span>
+
+conda create <span class="token parameter variable">-n</span> name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li><a href="https://www.jianshu.com/p/e39cb192bde0">https://www.jianshu.com/p/e39cb192bde0</a></li>
+<li><a href="https://mirror.nju.edu.cn/help/anaconda">https://mirror.nju.edu.cn/help/anaconda</a></li>
+<li><a href="https://mirrors.pku.edu.cn/Help/Anaconda">https://mirrors.pku.edu.cn/Help/Anaconda</a></li>
+<li><a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/">https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/</a></li>
+<li><a href="https://mirrors.bfsu.edu.cn/help/anaconda/">https://mirrors.bfsu.edu.cn/help/anaconda/</a></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>OpenCV</category>
+      </categories>
+      <tags>
+        <tag>Anaconda</tag>
+        <tag>Python</tag>
+        <tag>国内镜像</tag>
+        <tag>环境搭建教程</tag>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一看就会的 Anaconda 搭建 OpenCV for Python 环境（全平台通用）</title>
+    <url>/posts/18e12ea3/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>在学习 OpenCV 的时候，需要搭建 OpenCV 的环境并安装一些库，本文就准备了 OpenCV for Python，换而言之就是 OpenCV 的 python 的 API 接口。它拥有 OpenCV C++ API 的功能，同时也拥有 Python 语言的特性。</p>
+</blockquote>
+<h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a>视频教程</h2><iframe src="//player.bilibili.com/player.html?bvid=BV123411X79t&amp;page=1" width="800" height="600" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><blockquote>
+<p>安装 Anaconda 配置好国内镜像源</p>
+<p><a href="https://ahtelekb.gitee.io/posts/89ec84c4/">Windows 安装</a></p>
+<p><a href="https://ahtelekb.gitee.io/posts/2516b67e/">Ubuntu 安装</a></p>
+</blockquote>
+<h2 id="版本信息"><a href="#版本信息" class="headerlink" title="版本信息"></a>版本信息</h2><blockquote>
+<p>Python 版本 <mark>3.6</mark><br>OpenCV 版本 <mark>3.4.1.15</mark><br>OpenCV 扩展包版本 <mark>3.4.1.15</mark><br>dlib 版本 <mark>19.6.1</mark></p>
+</blockquote>
+<h2 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h2><blockquote>
+<p>Anaconda 创建 Python 虚拟环境</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda create <span class="token parameter variable">-n</span> OpenCV3.6 <span class="token assign-left variable">python</span><span class="token operator">=</span><span class="token number">3.6</span>    <span class="token comment"># 通过 anaconda 创建虚拟环境</span>
+
+<span class="token comment"># 点 y 即可</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230123193329504-220514205.png" alit="Anaconda 创建 Python 虚拟环境">
+
+<blockquote>
+<p>激活虚拟环境</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">activate OpenCV3.6 <span class="token comment"># 激活虚拟环境</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230123193536051-2015655394.png" alit="激活虚拟环境">
+
+<blockquote>
+<p>安装所需资源库</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> opencv-python<span class="token operator">==</span><span class="token number">3.4</span>.1.15
+pip <span class="token function">install</span> opencv-contrib-python<span class="token operator">==</span><span class="token number">3.4</span>.1.15
+pip <span class="token function">install</span> <span class="token assign-left variable">dlib</span><span class="token operator">==</span><span class="token number">19.6</span>.1
+pip <span class="token function">install</span> numpy
+pip <span class="token function">install</span> matplotlib<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230123193644746-1149243346.png" alit="安装中">
+
+<blockquote>
+<p>检查是否成功<br>显示 3.4.1 就没问题了</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 检查是否成功</span>
+
+python
+<span class="token function">import</span> cv2
+cv2.__version__<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230123193854750-1017863397.png" alit="显示 3.4.1 就没问题了">
+
+<h2 id="程序测试"><a href="#程序测试" class="headerlink" title="程序测试"></a>程序测试</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 导入cv模块</span>
+<span class="token keyword">import</span> cv2
+
+<span class="token comment"># 读取图像，支持 bmp、jpg、png、tiff 等常用格式</span>
+img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'img\cat.jpg'</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 创建窗口并显示图像</span>
+cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'image'</span><span class="token punctuation">,</span> img<span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 释放窗口</span>
+cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="https://img2023.cnblogs.com/blog/2977530/202301/2977530-20230129162740327-1389299019.png" alt="展示运行结果">
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li><a href="https://blog.csdn.net/liubing8609/article/details/109387386">https://blog.csdn.net/liubing8609/article/details/109387386</a></li>
+<li><a href="https://blog.csdn.net/m0_72557783/article/details/128164119">https://blog.csdn.net/m0_72557783/article/details/128164119</a></li>
+<li><a href="https://www.bilibili.com/video/BV1yK4y1S77X?p=2&amp;vd_source=c15c77b8fb131392010c8abe3d5b6560">https://www.bilibili.com/video/BV1yK4y1S77X?p=2&amp;vd_source=c15c77b8fb131392010c8abe3d5b6560</a></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>OpenCV</category>
+      </categories>
+      <tags>
+        <tag>Anaconda</tag>
+        <tag>Python</tag>
+        <tag>OpenCV</tag>
+        <tag>环境搭建</tag>
+        <tag>全平台通用</tag>
+      </tags>
+  </entry>
+</search>
